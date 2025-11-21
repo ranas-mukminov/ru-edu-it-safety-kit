@@ -1,0 +1,26 @@
+name: "МБОУ СОШ №1"
+type: school
+isps:
+  - name: "Rostelecom"
+    speed_mbps: 100
+    is_primary: true
+buildings:
+  - name: "Main Building"
+    is_hq: true
+    vlans:
+      - id: 10
+        name: "admin"
+        role: admin
+        subnet: "10.10.10.0/24"
+      - id: 20
+        name: "teachers"
+        role: teacher
+        subnet: "10.10.20.0/24"
+      - id: 30
+        name: "students"
+        role: student
+        subnet: "10.10.30.0/24"
+      - id: 40
+        name: "guests"
+        role: guest
+        subnet: "10.10.40.0/24"

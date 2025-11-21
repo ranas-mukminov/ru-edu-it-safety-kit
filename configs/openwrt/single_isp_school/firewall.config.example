@@ -1,0 +1,53 @@
+# /etc/config/firewall example
+
+config defaults
+	option syn_flood	'1'
+	option input		'REJECT'
+	option output		'ACCEPT'
+	option forward		'REJECT'
+
+config zone
+	option name		'lan'
+	list   network		'lan'
+	option input		'ACCEPT'
+	option output		'ACCEPT'
+	option forward		'ACCEPT'
+
+config zone
+	option name		'wan'
+	list   network		'wan'
+	list   network		'wan6'
+	option input		'REJECT'
+	option output		'ACCEPT'
+	option forward		'REJECT'
+	option masq		'1'
+	option mtu_fix		'1'
+
+# VLAN Zones
+config zone
+	option name		'students'
+	list   network		'students_vlan'
+	option input		'REJECT' # Block access to router management
+	option output		'ACCEPT'
+	option forward		'REJECT' # Isolate from other VLANs
+
+config forwarding
+	option src		'students'
+	option dest		'wan'
+
+# DNS Interception (Force DNS to router/filtered DNS)
+config rule
+	option name		'Allow-DNS-Students'
+	option src		'students'
+	option dest_port	'53'
+	option proto		'tcp udp'
+	option target		'ACCEPT'
+
+# Block direct access to other DNS servers (force interception)
+config rule
+	option name		'Block-External-DNS-Students'
+	option src		'students'
+	option dest		'wan'
+	option dest_port	'53'
+	option proto		'tcp udp'
+	option target		'REJECT'

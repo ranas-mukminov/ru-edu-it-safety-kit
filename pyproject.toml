@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ru-edu-it-safety-kit"
+version = "0.1.0"
+description = "Baseline IT-safety infrastructure kit for Russian schools and colleges"
+authors = [
+  { name = "run-as-daemon.ru", email = "info@run-as-daemon.ru" },
+]
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "click>=8.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.0",
+    "black>=23.0.0",
+    "bandit>=1.7.0",
+    "pip-audit>=2.5.0",
+    "types-PyYAML",
+]
+
+[project.scripts]
+ru-safety = "ru_edu_it_safety_kit.cli:main"
+
+[tool.ruff]
+line-length = 120
+select = ["E", "F", "B", "I"]
+ignore = []
+
+[tool.black]
+line-length = 120

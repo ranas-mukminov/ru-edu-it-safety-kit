@@ -1,0 +1,32 @@
+name: "Политехнический Колледж"
+type: college
+isps:
+  - name: "Dom.ru"
+    speed_mbps: 500
+    is_primary: true
+  - name: "MTS Backup"
+    speed_mbps: 100
+    is_primary: false
+buildings:
+  - name: "Main Campus"
+    is_hq: true
+    vlans:
+      - id: 10
+        name: "admin_hq"
+        role: admin
+        subnet: "172.16.10.0/24"
+      - id: 20
+        name: "teachers_hq"
+        role: teacher
+        subnet: "172.16.20.0/24"
+  - name: "Dormitory"
+    is_hq: false
+    vlans:
+      - id: 100
+        name: "students_dorm"
+        role: student
+        subnet: "172.16.100.0/24"
+      - id: 101
+        name: "iot_dorm"
+        role: iot
+        subnet: "172.16.101.0/24"

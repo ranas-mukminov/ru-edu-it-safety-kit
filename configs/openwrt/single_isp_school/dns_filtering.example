@@ -1,0 +1,25 @@
+# /etc/config/dhcp example for DNS filtering
+
+config dnsmasq
+	option domainneeded	'1'
+	option boguspriv	'1'
+	option filterwin2k	'0'
+	option localise_queries	'1'
+	option rebind_protection '1'
+	option rebind_localhost '1'
+	option local		'/lan/'
+	option domain		'lan'
+	option expandhosts	'1'
+	option nonegcache	'0'
+	option authoritative	'1'
+	option readethers	'1'
+	option leasefile	'/tmp/dhcp.leases'
+	option resolvfile	'/tmp/resolv.conf.auto'
+	option localservice	'1'
+	option ednspacket_max	'1232'
+
+# Upstream DNS for filtering (e.g. Yandex.DNS Family or SkyDNS)
+# TODO: Replace with your actual filtering DNS IPs
+# Yandex.DNS Family:
+list server '77.88.8.7'
+list server '77.88.8.3'

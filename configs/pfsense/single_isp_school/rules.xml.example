@@ -1,0 +1,41 @@
+<!-- pfSense Rules Example (Partial XML) -->
+<filter>
+    <!-- Block access to Firewall WebGUI from Student VLAN -->
+    <rule>
+        <type>block</type>
+        <interface>opt1</interface> <!-- Assuming opt1 is Student VLAN -->
+        <ipprotocol>inet</ipprotocol>
+        <protocol>tcp</protocol>
+        <destination>
+            <address>self</address>
+            <port>443</port>
+        </destination>
+        <descr>Block Student Access to WebGUI</descr>
+    </rule>
+
+    <!-- Allow DNS to Firewall -->
+    <rule>
+        <type>pass</type>
+        <interface>opt1</interface>
+        <ipprotocol>inet</ipprotocol>
+        <protocol>udp</protocol>
+        <destination>
+            <address>self</address>
+            <port>53</port>
+        </destination>
+        <descr>Allow DNS to Firewall</descr>
+    </rule>
+
+    <!-- Allow HTTP/HTTPS to WAN -->
+    <rule>
+        <type>pass</type>
+        <interface>opt1</interface>
+        <ipprotocol>inet</ipprotocol>
+        <protocol>tcp</protocol>
+        <destination>
+            <any/>
+        </destination>
+        <destination_port>80-443</destination_port>
+        <descr>Allow Web Access</descr>
+    </rule>
+</filter>
